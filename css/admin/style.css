@@ -1,0 +1,157 @@
+body {
+  font-family: "Roboto", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: gray;
+}
+table {
+  width: 80%;
+}
+
+form {
+  background-color: white;
+  text-align: center;
+  border: 1px solid black;
+}
+hr {
+  background-color: black;
+  height: 0.5px;
+}
+#index {
+  background-color: white;
+  height: 800px;
+}
+#index_vList {
+  width: 80%;
+}
+#iv_num {
+  width: 5%;
+}
+#ivisit {
+  width: 10%;
+}
+#iv_date {
+  width: 15%;
+}
+#iv_reason {
+  width: 60%;
+}
+#iv_state {
+  width: 15%;
+}
+
+#index_rList {
+  width: 40%;
+}
+#ir_num {
+  width: 5%;
+}
+#ir_dong {
+  width: 15%;
+}
+#ir_MCount {
+  width: 5%;
+}
+
+#a_list {
+  width: 80%;
+}
+#a_num {
+  width: 5%;
+}
+#a_dong {
+  width: 10%;
+}
+#a_name {
+  width: 10%;
+}
+#a_pos {
+  width: 5%;
+}
+#a_del {
+  width: 5%;
+}
+
+#a_resmod {
+  position: relative;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  background-color: #dfdbe5;
+}
+#apart_type {
+  width: 10%;
+}
+#ar_name {
+  width: 20%;
+}
+#ar {
+  position: relative;
+  left: 200px;
+  bottom: 227.5px;
+}
+#ar1 {
+  position: relative;
+  right: 200px;
+}
+#ar_button {
+  position: relative;
+  bottom: 100px;
+}
+#ar_telnum {
+  width: 20%;
+}
+#ar_id {
+  width: 20%;
+}
+#ar_pwd {
+  width: 20%;
+}
+#ar_pwd_check {
+  width: 20%;
+}
+#del_button {
+  width: 15%;
+}
+
+#i_date1 {
+  height: 80%;
+}
+#i_date2 {
+  height: 80%;
+}
+#dates {
+  position: relative;
+  left: 200px;
+}
+p {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+#visit {
+  background-color: white;
+  height: 800px;
+}
+
+#vList {
+  width: 80%;
+}
+#vList td v_del {
+  width: 20%;
+}
+#v_del {
+  width: 5%;
+}
+#v_forms {
+  padding: 10px 115px;
+}
+
+#r_list {
+  height: 800px;
+  padding: auto;
+}
+#a_del {
+  width: 5%;
+}

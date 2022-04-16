@@ -1,0 +1,121 @@
+{% set title = "거주자 리스트" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form id="row g-3" action="javascript://" style="position: relative ; bottom: 50px; right :5%">
+    <h2 style="text-align: center;">거주자 조회</h2>
+    <button type="submit" id="dels" name="dels" formmethod="post" formaction ="/admin/visit/deletes" class='btn btn-danger'>선택 삭제</button>
+    <div id="wrapper" style="width:110%; position: relative ; "></div>
+</form>
+<script type="">
+    const grid = new gridjs.Grid({
+    columns: [{
+        id: 'myCheckbox',
+        name: 'Del',
+        plugin: {
+          // install the RowSelection plugin
+          component: gridjs.plugins.selection.RowSelection,
+          // RowSelection config
+          props: {
+            // use the "email" column as the row identifier
+            id: (row) => row.cell(1).data
+          },
+          formatter: (cell, row) =>{
+             return gridjs.h({
+                 value:row.cell(1)
+             })
+          }
+        }
+      },"번호",
+       {name: gridjs.h('div', {
+        style: {
+          padding: '5px',
+          'text-align': 'center',
+        }
+      }, '방문일자')
+    } ,"아파트 주소", "방문자명","상태","사유",
+      { 
+        name: '승낙',
+        formatter: (cell, row) => {
+            return gridjs.h('button', {
+            className: 'btn btn-primary',
+            value:cell,
+            type:'submit',
+            name:'num',
+            formmethod : 'post',
+            formaction :'/admin/visit/acc'
+            
+        }, '승낙');
+        }
+    },
+    { 
+        name: '거절',
+        formatter: (cell, row) => {
+            return gridjs.h('button', {
+            className: 'btn btn-primary',
+            value:cell,
+            type:'submit',
+            name:'num',
+            formmethod : 'post',
+            formaction :'/admin/visit/refuse'
+            
+        }, '거절');
+        }
+    },
+    { 
+        name: '수정',
+        formatter: (cell, row) => {
+            return gridjs.h('button', {
+            className: 'btn btn-primary',
+            value:cell,
+            type:'submit',
+            name:'num',
+            formmethod : 'post',
+            formaction :'/admin/visit/modify'
+            
+        }, '수정');
+        }
+    },
+    { 
+        name: '삭제',
+        id:'delete',
+        formatter: (cell, row) => {
+            return gridjs.h('button', {
+            className: 'btn btn-danger',
+            value:cell,
+            type:'submit',
+            name:'num',
+            formmethod : 'post',
+            formaction :'/admin/visit/delete'
+            
+        }, '삭제');
+        }
+    }]
+    ,
+    data: [
+        {% for reservation in reservation %}
+        [{{reservation.id}},moment(new Date("{{reservation.time}}")).format("yyyy-MM-DD hh:mm"),"{{reservation.apart_name}} {{reservation.dong}}동 {{reservation.ho}}호","{{reservation.name}}","{{reservation.state}}","{{reservation.reason}}",{{reservation.id}},{{reservation.id}},{{reservation.id}},{{reservation.id}}],
+        {% endfor %}
+    ],
+    pagination:{
+        limit:10
+    },
+    sort:true,
+    search:{
+        enalbed: true
+    }
+}).render(document.getElementById("wrapper"));
+
+grid.on('ready', () => {
+  // find the plugin with the give plugin ID
+  const checkboxPlugin = grid.config.plugin.get('myCheckbox');
+  var tempPagination
+  // subscribe to the store events
+  checkboxPlugin.props.store.on('updated', function (state, prevState) {
+    var temp = state['rowIds']
+    document.getElementById('dels').value = temp
+    console.log('checkbox updated', temp);
+  });
+})
+</script>
+{% endblock %}

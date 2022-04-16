@@ -1,0 +1,32 @@
+{% set title = "거주자 조회" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form>
+    <div class="row row-cols-2" ">
+        <div class="col-md-4">
+            <label  class="form-label">세대주 명</label>
+            <input type="text" class="form-control" readonly>
+            <label class="form-label">전화번호</label>
+            <input type="text" class="form-control"readonly>
+            <label class="form-label">아파트 명</label>
+            <input type="tel" class="form-control"readonly>
+        </div>
+        <div class="col-md-12">
+            
+        </div>
+        <div class="col-md-2">
+            <label  class="form-label">동</label>
+            <input type="text" class="form-control"readonly>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">호</label>
+            <input type="text" class="form-control"readonly>
+        </div>
+        <div class="col-md-12"><br>
+            <input type="submit" value="조회">
+            <input type="button" value="삭제">
+        </div>
+    </div>
+</form>
+{% endblock %}

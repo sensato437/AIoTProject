@@ -1,0 +1,41 @@
+{% set title = "거주자 회원가입" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form method="post" action="/admin/apart/register">
+    <div class="row row-cols-2">
+        <div class="col-md-4">
+            <label  class="form-label" >id</label>
+            <input type="text" class="form-control" name="id">
+            <label  class="form-label" >password</label>
+            <input type="password" class="form-control" name="password">
+            <label  class="form-label" >세대주 명</label>
+            <input type="text" class="form-control" name="name">
+            <label class="form-label">전화번호</label>
+            <input type="text" class="form-control"name="tel">
+            <label class="form-label">아파트 명</label>
+            <select class="form-control" name='apart'>
+                <option>101</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            
+        </div>
+        <div class="col-md-2">
+            <label  class="form-label">동</label>
+            <select class="form-control" name='dong'>
+                <option>101</option>
+                <option>102</option>
+            </select>
+            
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" name="'ho">호</label>
+            <select class="form-control">
+                <option>101</option>
+                <option>102</option>
+            </select>
+        </div>
+    </div>
+</form>
+{% endblock %}

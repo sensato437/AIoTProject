@@ -1,0 +1,20 @@
+{% set title = "아파트 등록" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form class="row g-3" action="/admin/apart/register" method="post" accept-charset="utf-8" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: left;">아파트 정보 등록</h2><br>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">아파트 이름</label>
+        <input type="text" class="form-control" name="name">
+        <label for="inputEmail4" class="form-label" >동</label>
+        <input type="text" class="form-control" name="dong">
+        <label for="inputEmail4" class="form-label" >호</label>
+        <input type="text" class="form-control" name="ho">
+    </div>
+    <div class="col-md-12" style="padding-top: 20px;">
+        <button type="submit" class="btn btn-primary">제출</button>
+        <button type="button" class="btn btn-primary">취소</button>
+    </div>
+</form>
+{% endblock %}

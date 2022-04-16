@@ -1,0 +1,26 @@
+{% set title = "아파트 요약리스트" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form id="row g-3" action="javascript://" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: center;">아파트 상태 정보</h2><br>
+    <div id="wrapper"></div>
+</form>
+
+<script type="">
+    const grid = new gridjs.Grid({
+    columns: ["번호","아파트주소","방문자명","상태","사유"]
+    ,
+    data: [
+    {% for list in list %}
+        [{{list.id}},'{{list.apart_name}}{{list.dong}}동 {{list.ho}}호','{{list.name}}','{{list.state}}','{{list.reason}}'],
+    {% endfor %}
+    ],
+    pagination:{
+        limit:10
+    },
+    sort:true
+}).render(document.getElementById("wrapper"));
+
+</script>
+{% endblock %}

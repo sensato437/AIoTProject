@@ -1,0 +1,70 @@
+{% set title = "거주자 등록" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<form method="post" action="/admin/resident/register" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: left;">거주자 정보 등록</h2><br>
+    <div class="row row-cols-2" ">
+        <div class="col-md-4">
+            <label  class="form-label" >아이디</label>
+            <input type="text" class="form-control" name="id">
+            <label  class="form-label" >비밀번호</label>
+            <input type="password" class="form-control" name="password">
+            <label  class="form-label" >세대주 명</label>
+            <input type="text" class="form-control" name="name">
+            <label class="form-label">전화번호</label>
+            <input type="text" class="form-control"name="tel">
+            <label class="form-label">아파트 명</label>
+            <select class="form-control" name='apart' id="apart" onchange="dongho()">
+                <option></option>
+                {% for simpledata in simpledata %}
+                    <option >{{simpledata.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-12">
+            
+        </div>
+        <div class="col-md-2">
+            <label  class="form-label">동</label>
+            <select class="form-control" name='dong' id="dong">
+            </select>
+            
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" >호</label>
+            <select class="form-control" name="ho" id="ho">
+            </select>
+        </div>
+        <div class="col-md-12" style="padding-top: 20px;">
+            <button type="submit" class="btn btn-primary">등록</button>
+            <button type="button" class="btn btn-primary">취소</button>
+        </div>
+    </div>
+    <script type="">
+    function dongho() {
+        var maxdong=0;
+        var maxho=0;
+        var apartname=document.getElementById('apart');
+        document.getElementById('dong').innerHTML="";
+        document.getElementById('ho').innerHTML="";
+        {% for simpledata in simpledata %}
+            if(apartname.value == "{{simpledata.name}}"){
+                maxdong = [{{simpledata.dong}}]
+                maxho = [{{simpledata.ho}}]
+            }
+        {% endfor %}
+        for(var i=0;i<maxdong.length;i++){
+            document.getElementById('dong').innerHTML += "<option>"+maxdong[i]+"</option>";
+        }
+        for(var i=0;i<maxho.length;i++){
+            document.getElementById('ho').innerHTML += "<option>"+maxho[i]+"</option>";
+        }
+
+        
+    }
+    
+    </script>
+</form>
+{% endblock %}

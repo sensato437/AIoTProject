@@ -1,0 +1,20 @@
+{% set title = "아파트 수정" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form class="row g-3" action="/admin/apart/modify/put" method="post" accept-charset="utf-8" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: left;">아파트 정보 수정</h2><br>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">아파트 이름</label>
+        <input type="text" class="form-control" name="name" value="{{Apartments.apartment_name}}">
+        <label for="inputEmail4" class="form-label" >동</label>
+        <input type="text" class="form-control" name="dong" value="{{Apartments.dong}}">
+        <label for="inputEmail4" class="form-label" >호</label>
+        <input type="text" class="form-control" name="ho" value="{{Apartments.ho}}">
+    <div class="col-md-12" style="padding-top: 20px;">
+        <button type="submit" class="btn btn-primary" value="{{Apartments.id}}" name="id">수정</button>
+        <button type="button" class="btn btn-primary">취소</button>
+    </div>
+    {{apart}}
+</form>
+{% endblock %}

@@ -1,0 +1,239 @@
+{% set title = "관리자 메인페이지" %}
+{% extends "admin/base.html" %}
+{% set max = reservation | length %}
+{% set acc = 0 %}
+{% set refuse = 0 %}
+{% set wait = 0 %}
+{% set apart=[] %}
+{% for aparts in apartment %}
+    {% set apart = (apart.push(aparts.apartment_name),apart) %}
+{% endfor %}
+{% for res in reservation %}
+    {% if res.state == '요청중....' %}
+        {% set wait =  wait +1 %}
+    {% endif %}
+    {% if res.state == '승낙' %}
+        {% set acc = acc + 1 %}
+    {% endif %}
+    {% if res.state == '거절' %}
+        {% set refuse = refuse + 1 %}
+    {% endif %}
+{% endfor %}
+{{ apart  }}
+{% block content %}
+<form id ="index" method="post" action="javascript://" style="position: relative ; bottom: 50px;">
+    <div>
+        <h2>방문 요청 정보</h2>
+        <canvas id="myChart2" style=" height:30vh; width:60vw; position: relative ; right:350px;"></canvas>
+        <table class="table table-hover" style="width : 30%; position: relative ; left:350px; bottom:225px;">
+            <tr align="center">
+                <td>
+                    전체
+                </td>
+                <td>
+                    요청
+                </td>
+                <td>
+                    승인
+                </td>
+                <td>
+                    거절
+                </td>
+            </tr>
+                
+            <tr align="center" >
+                <td id="전체" onclick="res_list_all()" style="cursor : pointer" >
+                    {{reservation.length}}
+                </td>
+                <td id="요청중...."onclick="res_wait()" style="color: rgb(255, 99, 132); cursor : pointer">
+                    {{wait}}
+                </td>
+                <td id="승낙" onclick="res_list(this.id)" style="color:rgb(54, 162, 235); cursor : pointer">
+                    {{acc}}
+                </td>
+                <td id="거절" onclick="res_list(this.id)" style="color: rgb(255, 205, 86); cursor : pointer">
+                    {{refuse}}
+                </td>
+            </tr>
+        </table>
+        <input type="text" name="state_submit" hidden>
+    </div>
+    <div style="position: relative ; bottom: 50px;">
+        <h2>방문자 예약 추이</h2>  
+        <p id ="dates" >
+            <input type="button" onclick="timeset(1)" value="일별" class="btn btn-secondary" style="padding-left: 20px; padding-right: 20px;" margin="20px">
+            <input type="button" onclick="timeset(2)" value="주별" class="btn btn-secondary" style="padding-left: 20px; padding-right: 20px;">
+            <input type="button" onclick="timeset(3)" value="월별" class="btn btn-secondary" style="padding-left: 20px; padding-right: 20px;"></p>
+        <p>
+            <canvas id="myChart" style=" height:30vh; width:60vw;"></canvas>
+        </p>
+    </div>
+    <div style="position: relative ; bottom: 20px;">
+        <h2>아파트 간략화 정보</h2>
+        <div id="wrapper"></div>
+    </div>
+</form>
+
+<script type="">
+    function res_list(id){
+        var openWd = window.open('/admin/simpleres',"simplelist")
+        document.getElementsByName('state_submit')[0].value = id;
+        var index = document.getElementById('index');
+        index.action = '/admin/simpleres';
+        index.method = 'post';
+        index.target = "simplelist";
+
+        index.submit();
+    }
+
+    function res_wait() {
+        var openWd = window.open('/admin/simpleres/wait',"simplelist")
+        var index = document.getElementById('index');
+        index.action = '/admin/simpleres/wait';
+        index.method = 'post';
+        index.target = "simplelist";
+        
+        index.submit();
+    }
+
+    function res_list_all(){
+        var openWd = window.open('/admin/simpleres',"simplelist")
+        var index = document.getElementById('index');
+        index.action = '/admin/simpleres/all';
+        index.method = 'post';
+        index.target = "simplelist";
+        
+        index.submit();
+    }
+
+    var labels = [];
+//2번 해당주것만 받아오기
+//3length로 해결
+    
+
+    for(var i=0;i<7;i++){
+        labels.push(moment().day(i+1).format('YYYY-MM-DD'));
+        }
+        var data = {
+            labels: labels,
+            datasets: [{
+            label: "days",
+            backgroundColor: 'rgb(108, 117, 125)',
+            borderColor: 'rgb(108, 117, 125)',
+            data: [{{day}}]
+            }]
+    };
+    var config = {
+        type: 'bar',
+        data: data,
+        options: {responsive: false
+            }
+        }
+;
+
+    var myChart = new Chart(
+    document.getElementById('myChart'),
+    config)
+
+function getWeekOfMonth(target){
+    
+    var targetArr = target.split("-");
+        
+    var dateSel = new Date(targetArr[0], targetArr[1] - 1, targetArr[2]);
+    var daySel = dateSel.getDate();
+    
+    var dateStr = new Date(targetArr[0], targetArr[1] - 1, "01");
+    var dayStr = dateStr.getDay();
+    
+    console.log((daySel + dayStr) / 7);
+    return Math.ceil((daySel + dayStr) / 7);         
+}
+
+function timeset(sel){
+    var label;
+    var labels=[]
+    var days=[{{day}}];
+    var weeks=[{{week}}];
+    var months=[{{month}}];
+    if(sel==1){
+        label="days"
+        for(var i=0;i<7;i++){
+            labels.push(moment().day(i+1).format('YYYY-MM-DD'));
+        }
+        var datas=days
+    }
+    else if(sel==2){
+        label="weeks"
+        for(var i=6;i>=0;i--){
+            labels.push(moment().subtract(i-3,'w').format("MM")+"월"+getWeekOfMonth(moment().subtract(i-2,'w').format("YYYY-MM-DD"))+"주");
+        }
+        var datas=weeks
+    }
+    
+    else if(sel==3){
+        label="month"
+        for(var i=6;i>=0;i--){
+            labels.push(moment().subtract(i-3,'M').format("YYYY-MM"));
+        }
+        var datas=months
+    }
+    
+    myChart.config._config.data.datasets[0].data = datas;
+    myChart.config._config.data.datasets[0].label = label;
+    myChart.config._config.data.labels = labels;
+
+    
+    myChart.update();
+    
+}
+
+
+
+const data2 = {
+  labels: [
+    '요청중....',
+    '수락',
+    '거절'
+  ],
+  datasets: [{
+    label: '요청상태 요약',
+    data: [{{wait}}, {{acc}}, {{refuse}}],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+const config2 = {
+    type: 'doughnut',
+    data: data2,
+    options : {responsive: false
+    }
+};
+
+var myChart2 = new Chart(
+    document.getElementById('myChart2'),
+    config2)
+
+
+    new gridjs.Grid({
+  columns: ["아파트명", "최대    동", "호수"],
+  data: [
+    {% for apart in simple %}
+        ["{{apart.name}}",{{apart.dong}},{{apart.ho}}],
+    {% endfor %}
+  ],
+    pagination:{
+        limit:5
+    },
+    sort:true,
+    search:{
+        enalbed: true
+    }
+}).render(document.getElementById("wrapper"));
+</script>
+
+{% endblock %}

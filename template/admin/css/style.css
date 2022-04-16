@@ -1,0 +1,31 @@
+#index_vList {
+  width: 80%;
+}
+#iv_num {
+  width: 5%;
+}
+#ivisit {
+  width: 10%;
+}
+#iv_date {
+  width: 15%;
+}
+#iv_reason {
+  width: 60%;
+}
+#iv_state {
+  width: 15%;
+}
+
+#index_rList {
+  width: 80%;
+}
+#ir_num {
+  width: 33%;
+}
+#ir_dong {
+  width: 33%;
+}
+#ir_MCount {
+  width: 34%;
+}

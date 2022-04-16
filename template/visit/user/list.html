@@ -1,0 +1,74 @@
+{% set title = "방문예약 리스트" %}
+{% extends "visit/base.html" %}
+
+{% block content %}
+<form action="">
+  <div class="row g-3">
+    <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">기간 시작</label>
+        <input type="date" class="form-control" id="inputPassword4"/>
+    </div>
+    <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">일자</label>
+        <input type="date" class="form-control" id="inputPassword4"/>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control" name="card_type" id="card_type" required>
+            <option value="">상태</option>
+            <option value="요청중">요청중</option>
+            <option value="승인">승인</option>
+            <option value="취소">취소</option>
+        </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" value="" readonly>조회</button>
+    </div>
+  </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" value="" readonly>삭제</button>
+    </div>    
+    
+    <table class="table table-bordered" border="1">
+        <tr>
+            <td>**</td>
+            <td>번호</td>
+            <td>방문자</td>
+            <td>방문 아파트/방문 동/방문 호</td>
+            <td>일자</td>
+            <td>상태</td>
+            <td>사유</td>
+        </tr>
+        <tr>
+            <td>취소</td>
+            <td>1</td>
+            <td>AAA</td>
+            <td>아파트 명/동/호</td>
+            <td>YYYY-MM-dd,hh-mm-ss</td>
+            <td>요청 중</td>
+            <td>사유</td>
+        </tr>
+        <tr>
+            <td>취소</td>
+            <td>2</td>
+            <td>BBB</td>
+            <td>아파트 명/동/호</td>
+            <td>YYYY-MM-dd,hh-mm-ss</td>
+            <td>승인</td>
+            <td>사유</td>
+        </tr>
+        <tr>
+            <td>취소</td>
+            <td>3</td>
+            <td>CCC</td>
+            <td>아파트 명/동/호</td>
+            <td>YYYY-MM-dd,hh-mm-ss</td>
+            <td>거절</td>
+            <td>사유</td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

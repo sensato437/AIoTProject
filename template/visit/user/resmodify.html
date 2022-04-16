@@ -1,0 +1,66 @@
+{% set title = "방문예약 수정" %}
+{% extends "visit/base.html" %}
+
+{% block content %}
+<hr>
+<h2>방문자 정보</h2>
+    <hr>
+    <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">방문자</label>
+        <input type="text" class="form-control" id="inputEmail4" value="" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">전화번호</label>
+        <input type="tel" class="form-control" id="inputPassword4">
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">일자</label>
+        <input type="date" class="form-control" id="inputPassword4"/>
+    </div>
+    <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">시간</label>
+        <input type="time" class="form-control" id="inputPassword4"/>
+      </div>
+    </div>
+    <div class="col-md-3">
+        <label for="inputAddress2" class="form-label">방문 사유</label>
+        <select class="form-control" name="card_type" id="card_type" required>
+            <option value="">-------사유-------</option>
+            <option value="택배">택배</option>
+            <option value="배달">배달</option>
+            <option value="친척">친척</option>
+            <option value="경비원">경비원</option>
+        </select>
+    </div>
+    <hr>
+    <h2>방문 정보</h2>
+    <hr>
+    <div class="col-md-6">
+        <label for="inputCity" class="form-label">아파트 명</label>
+        <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="col-md-3">
+        <label for="inputState" class="form-label">동</label>
+        <select class="form-control" name="card_type" id="card_type" required>
+            <option value="">xx동</option>
+            <option value="1">1동</option>
+            <option value="2">2동</option>
+            <option value="3">3동</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label for="inputZip" class="form-label">호</label>
+        <select class="form-control" name="card_type" id="card_type" required>
+            <option value="">xx호</option>
+            <option value="1">101호</option>
+            <option value="2">102호</option>
+            <option value="3">103호</option>
+        </select>
+
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" value="" readonly>수정</button> <button type="submit" class="btn btn-primary" value="" readonly>취소</button>
+    </div>
+</form>
+{% endblock %}

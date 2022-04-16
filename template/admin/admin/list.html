@@ -1,0 +1,35 @@
+{% set title = "관리자 리스트" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form id="row g-3" >
+    <div class="col-md-12">
+        <input type="button" class="btn btn-danger" value="선택 삭제" id="del_button">
+    
+        구분 <select>
+            <option>전체</option>
+            <option>일반</option>
+        </select>
+    </div>
+    <div class="col-md-12">
+    <table class="table table-hover">
+        <tr>
+            <td id="a_del"></td>
+            <td id="a_num">번호</td>
+            <td id="a_dong">동</td>
+            <td id="a_name">관리자명</td>
+            <td id="a_pos">구분</td>
+        </tr>
+        
+        <tr>
+            <td><input type="checkbox"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% set title = "방문예약 수정" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form method="post" action="/admin/visit/modify/put" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: left;">방문자 정보 수정</h2><br>
+    <div class="row row-cols-2">
+        <div class="col-md-4">
+            <label  class="form-label" >방문자명</label>
+            <input type="text" class="form-control" name="name" value="{{reservation.name}}" required >
+            <label class="form-label">전화번호</label>
+            <input type="text" class="form-control"name="tel" value="{{reservation.tel}}">
+            <label class="form-label">아파트 명</label>
+            <select class="form-control" name='apart' id="apart" onchange="dongho()">
+                {% for simpledata in simple %}
+                    {% if simpledata.name === reservation.apart_name %}
+                        <option selected>{{simpledata.name}}</option>
+                    {% else %}
+                        <option >{{simpledata.name}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label class="form-label">일자</label>
+            <input type="datetime-local" class="form-control"name="time" id="time">
+        </div>
+        <div class="col-md-12">
+            
+        </div>
+        <div class="col-md-2">
+            <label  class="form-label">동</label>
+            <select class="form-control" name='dong' id="dong" >
+                {% for simpledata in simple %}
+                {% for dong in simpledata.dong %}
+                    {% if simpledata.name === reservation.apart_name %}
+                        {% if dong === reservation.dong %}
+                            <option selected>{{dong}}</option>
+                        {% else %}
+                            <option >{{dong}}</option>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </select>
+            
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" >호</label>
+            <select class="form-control" name="ho" id="ho">
+                {% for simpledata in simple %}
+                {% for ho in simpledata.ho %}
+                    {% if simpledata.name === reservation.apart_name %}
+                        {% if ho === reservation.ho %}
+                            <option selected>{{ho}}</option>
+                        {% else %}
+                            <option >{{ho}}</option>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" >사유</label>
+            <select name="reason" class="form-control"> 
+                <option>배달</option>
+                <option>방문</option>
+                <option>기타</option>
+            </select>
+        </div>
+        <div class="col-md-12" style="padding-top: 20px;">
+            <button type="submit" class="btn btn-primary" value={{reservation.id}} name="id">수정</button>
+            <button type="button" class="btn btn-primary">취소</button>
+        </div>
+        
+    </div>
+</form>
+<script type="">
+    var set_Date = new Date("{{reservation.time}}")
+    set_Date = moment(new Date("{{reservation.time}}")).format("yyyy-MM-DDThh:mm:ss");
+    console.log(set_Date)
+    document.getElementById('time').value = set_Date;
+    function dongho() {
+        var maxdong=0;
+        var maxho=0;
+        var apartname=document.getElementById('apart');
+        document.getElementById('dong').innerHTML="";
+        document.getElementById('ho').innerHTML="";
+        {% for simpledata in simple %}
+            if(apartname.value == "{{simpledata.name}}"){
+                maxdong = [{{simpledata.dong}}]
+                maxho = [{{simpledata.ho}}]
+            }
+        {% endfor %}
+        for(var i=0;i<maxdong.length;i++){
+            document.getElementById('dong').innerHTML += "<option>"+maxdong[i]+"</option>";
+        }
+        for(var i=0;i<maxho.length;i++){
+            document.getElementById('ho').innerHTML += "<option>"+maxho[i]+"</option>";
+        }
+
+        
+    }
+</script>
+{% endblock %}

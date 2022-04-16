@@ -1,0 +1,14 @@
+{% set title = "아파트 등록" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form class="row g-3" action="/admin/apart/batchregister" method="post" accept-charset="utf-8" enctype="multipart/form-data" style="position: relative ; bottom: 50px;">
+    <h2 style="text-align: center;">아파트 일괄 등록</h2><br>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">파일선택</label>
+        <input class="form-control" type="file" id="formFile" name="upload" multiple>
+        <button type="submit" value="upload" class="btn btn-secondary" style="margin-top: 20px;"> 제출 </button>
+    </div>
+    
+</form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% set title = "거주자 리스트" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form id="row g-3">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-danger" value="삭제" id="del_button">
+    
+        구분 <select>
+            <option>전체</option>
+            <option>일반</option>
+        </select>
+    </div>
+    <div class="col-md-12">
+    <table class="table table-hover">
+        <tr>
+            <td ></td>
+            <td >아이디</td>
+            <td >거주자명</td>
+            <td>전화번호</td>
+            <td>아파트명</td>
+            <td >동</td>
+            <td >호</td>
+            
+        </tr>
+        {% for resident in residents %}
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>{{resident.id}}</td>
+            <td>{{resident.resident_name}}</td>
+            <td>{{resident.tel}}</td>
+            <td>{{resident.apartment_name}}</td>
+            <td>{{resident.dong}}</td>
+            <td>{{resident.ho}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% set title = "관리자 수정" %}
+{% extends "admin/base.html" %}
+
+{% block content %}
+<form class="row g-3" method="put" action="">
+    <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">관리자 구분</label>
+        <select name="a_types" class="form-control">
+            <option>일반</option>
+            <option>총괄</option>
+    </select>
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">관리자 id</label>
+        <input type="text" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">동</label>
+        <select name="a_types" class="form-control">
+            <option>101</option>
+            <option>102</option>
+    </select>
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">비밀번호</label>
+        <input type="password" class="form-control" id="inputPassword4" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">이름</label>
+        <input type="text" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">비밀번호 확인</label>
+        <input type="password" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">전화번호</label>
+        <input type="text" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">등록</button>
+        <button type="button" class="btn btn-primary">취소</button>
+    </div>
+</form>
+{% endblock %}
